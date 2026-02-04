@@ -43,14 +43,23 @@
             color: white;
             box-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
             transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
         }
+
         button:hover {
             transform: scale(1.1);
             box-shadow: 0 0 30px rgba(255, 105, 180, 1);
         }
 
-        /* IMAGE CONTAINERS */
-        #photo, #photo2 {
+        /* NO BUTTON */
+        #noBtn {
+            position: absolute;
+            background: linear-gradient(45deg, #999, #666);
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        /* IMAGE CONTAINER */
+        #photo {
             display: none;
             margin-top: 30px;
             animation: popIn 1.5s ease forwards;
@@ -61,8 +70,8 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
-        /* IMAGES */
-        #photo img, #photo2 img {
+        /* IMAGE */
+        #photo img {
             width: 450px;
             max-width: 90%;
             border-radius: 25px;
@@ -84,7 +93,7 @@
         }
 
         /* TEXT UNDER IMAGE */
-        #photo h2, #photo2 h2 {
+        #photo h2 {
             margin-top: 20px;
             font-size: 1.5em;
             text-shadow: 0 0 10px rgba(255,255,255,0.7);
@@ -99,40 +108,39 @@
     <!-- BUTTONS -->
     <div>
         <button onclick="yesClicked()">Yes 💖</button>
-        <button onclick="obviouslyClicked()">Obviously 😍</button>
+        <button id="noBtn">No 😅</button>
     </div>
 
-    <!-- FIRST IMAGE -->
+    <!-- IMAGE -->
     <div id="photo">
         <h2>I knew you would say yes 🥰</h2>
         <img src="alexa.jpg" alt="Alexa">
     </div>
 
-    <!-- SECOND IMAGE -->
-    <div id="photo2">
-        <h2>DUHHHHHHHHHHHHHHHHHH 😘</h2>
-        <img src="obviously.jpg" alt="Obviously">
-    </div>
-
-    <!-- HEARTS CONTAINER -->
+    <!-- HEARTS -->
     <div class="hearts" id="hearts"></div>
 
     <script>
-        // SHOW YES IMAGE
+        // YES CLICK
         function yesClicked() {
             document.getElementById("photo").style.display = "block";
-            document.getElementById("photo2").style.display = "none";
             spawnHearts();
         }
 
-        // SHOW OBVIOUSLY IMAGE
-        function obviouslyClicked() {
-            document.getElementById("photo2").style.display = "block";
-            document.getElementById("photo").style.display = "none";
-            spawnHearts();
+        // FLOATING NO BUTTON
+        const noBtn = document.getElementById("noBtn");
+
+        noBtn.addEventListener("mouseover", moveNo);
+        noBtn.addEventListener("click", moveNo);
+
+        function moveNo() {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
         }
 
-        // SPAWN FLOATING HEARTS
+        // HEARTS
         function spawnHearts() {
             for (let i = 0; i < 30; i++) {
                 const heart = document.createElement("span");
@@ -141,8 +149,7 @@
                 heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
                 heart.style.fontSize = (Math.random() * 24 + 18) + "px";
                 document.getElementById("hearts").appendChild(heart);
-
-                setTimeout(() => { heart.remove(); }, 6000);
+                setTimeout(() => heart.remove(), 6000);
             }
         }
     </script>
