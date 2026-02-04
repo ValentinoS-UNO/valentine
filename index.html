@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alexa 💖</title>
+
+    <style>
+        /* BODY */
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle at top, #ff5f9e, #8b1d5b);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+        }
+
+        /* HEADER */
+        h1 {
+            font-size: 3em;
+            text-shadow: 0 0 15px rgba(255,255,255,0.6);
+            animation: glow 2s infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #fff; }
+            to { text-shadow: 0 0 25px #ffb3d9; }
+        }
+
+        /* BUTTONS */
+        button {
+            padding: 16px 36px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 40px;
+            margin: 15px;
+            cursor: pointer;
+            background: linear-gradient(45deg, #ff9ecb, #ff3f8e);
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 105, 180, 1);
+        }
+
+        /* IMAGE CONTAINERS */
+        #photo, #photo2 {
+            display: none;
+            margin-top: 30px;
+            animation: popIn 1.5s ease forwards;
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* IMAGES */
+        #photo img, #photo2 img {
+            width: 450px;
+            max-width: 90%;
+            border-radius: 25px;
+            box-shadow: 0 0 35px rgba(255, 182, 193, 0.9);
+            margin-top: 20px;
+        }
+
+        /* FLOATING HEARTS */
+        .hearts span {
+            position: absolute;
+            bottom: -20px;
+            font-size: 24px;
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-110vh); opacity: 0; }
+        }
+
+        /* TEXT UNDER IMAGE */
+        #photo h2, #photo2 h2 {
+            margin-top: 20px;
+            font-size: 1.5em;
+            text-shadow: 0 0 10px rgba(255,255,255,0.7);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Alexa, will you be my Valentine? 💕</h1>
+
+    <!-- BUTTONS -->
+    <div>
+        <button onclick="yesClicked()">Yes 💖</button>
+        <button onclick="obviouslyClicked()">Obviously 😍</button>
+    </div>
+
+    <!-- FIRST IMAGE -->
+    <div id="photo">
+        <h2>I knew you would say yes 🥰</h2>
+        <img src="alexa.jpg" alt="Alexa">
+    </div>
+
+    <!-- SECOND IMAGE -->
+    <div id="photo2">
+        <h2>DUHHHHHHHHHHHHHHHHHH 😘</h2>
+        <img src="obviously.jpg" alt="Obviously">
+    </div>
+
+    <!-- HEARTS CONTAINER -->
+    <div class="hearts" id="hearts"></div>
+
+    <script>
+        // SHOW YES IMAGE
+        function yesClicked() {
+            document.getElementById("photo").style.display = "block";
+            document.getElementById("photo2").style.display = "none";
+            spawnHearts();
+        }
+
+        // SHOW OBVIOUSLY IMAGE
+        function obviouslyClicked() {
+            document.getElementById("photo2").style.display = "block";
+            document.getElementById("photo").style.display = "none";
+            spawnHearts();
+        }
+
+        // SPAWN FLOATING HEARTS
+        function spawnHearts() {
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement("span");
+                heart.innerHTML = "💖";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+                heart.style.fontSize = (Math.random() * 24 + 18) + "px";
+                document.getElementById("hearts").appendChild(heart);
+
+                setTimeout(() => { heart.remove(); }, 6000);
+            }
+        }
+    </script>
+
+</body>
+</html>
