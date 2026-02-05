@@ -63,6 +63,9 @@
             display: none;
             margin-top: 30px;
             animation: popIn 1.5s ease forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         @keyframes popIn {
@@ -70,19 +73,17 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
-        /* IMAGE */
+        /* IMAGE — BIG & DRAMATIC */
         #photo img {
-    width: 95vw;
-    height: 75vh;
-    border-radius: 25px;
-    box-shadow: 0 0 35px rgba(255, 182, 193, 0.9);
-    margin-top: 20px;
-    object-fit: contain;
-}
-
-
-
-
+            width: 95vw;
+            height: 75vh;
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 25px;
+            box-shadow: 0 0 35px rgba(255, 182, 193, 0.9);
+            margin-top: 20px;
+            object-fit: contain;
+        }
 
         /* FLOATING HEARTS */
         .hearts span {
@@ -128,7 +129,7 @@
     <script>
         // YES CLICK
         function yesClicked() {
-            document.getElementById("photo").style.display = "block";
+            document.getElementById("photo").style.display = "flex";
             spawnHearts();
         }
 
